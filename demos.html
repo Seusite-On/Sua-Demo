@@ -1435,21 +1435,24 @@ html { scroll-behavior: smooth; }
 
 <script>
 function showDemo(name) {
-  // Hide all pages
   document.querySelectorAll('.demo-page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
-
-  // Show selected
   document.getElementById('demo-' + name).classList.add('active');
-
-  // Mark tab active
   const tabs = document.querySelectorAll('.demo-tab');
   const map = ['manicure','barbearia','autocenter','salao','personal','marmitaria'];
   tabs[map.indexOf(name)].classList.add('active');
-
-  // Scroll to top
   window.scrollTo(0, 0);
+  window.location.hash = name;
 }
+
+// Auto-open demo based on URL hash
+(function() {
+  const hash = window.location.hash.replace('#', '');
+  const valid = ['manicure','barbearia','autocenter','salao','personal','marmitaria'];
+  if (hash && valid.includes(hash)) {
+    showDemo(hash);
+  }
+})();
 </script>
 
 </body>

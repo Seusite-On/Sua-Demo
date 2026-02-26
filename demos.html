@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dev On-line · Demos</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;600;700;800&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════════════════
+   DEMO SWITCHER (nav global)
+══════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+.demo-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 9999;
+  background: #0A0A0A;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.demo-nav::-webkit-scrollbar { display: none; }
+
+.demo-nav-brand {
+  padding: 0 20px;
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #00D4FF;
+  white-space: nowrap;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  height: 52px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.demo-tab {
+  padding: 0 20px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.4);
+  cursor: pointer;
+  border: none;
+  background: none;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.demo-tab:hover { color: rgba(255,255,255,0.8); }
+.demo-tab.active { color: white; border-bottom-color: #00D4FF; }
+
+/* All demo pages hidden by default */
+.demo-page { display: none; }
+.demo-page.active { display: block; }
+
+/* ══════════════════════════════════════════
+   SHARED HELPERS
+══════════════════════════════════════════ */
+.placeholder-img {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  border-radius: 8px;
+  user-select: none;
+}
+
+/* ══════════════════════════════════════════
+   1. MANICURE (light luxury gold)
+══════════════════════════════════════════ */
+#demo-manicure {
+  --gold: #B8972E;
+  --gold-light: #D4AF55;
+  --gold-pale: #F5EDD6;
+  --black: #1A1108;
+  --gray: #6B6156;
+  --bg: #FDFAF5;
+  background: var(--bg);
+  color: var(--black);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  padding-top: 52px;
+}
+
+/* manicure header */
+#demo-manicure .m-header {
+  background: rgba(253,250,245,0.95);
+  backdrop-filter: blur(12px);
+  padding: 18px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(184,151,46,0.2);
+}
+#demo-manicure .m-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  color: var(--black);
+}
+#demo-manicure .m-logo span { color: var(--gold); font-style: italic; }
+#demo-manicure .m-nav { display: flex; gap: 24px; }
+#demo-manicure .m-nav a {
+  font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gray); text-decoration: none;
+}
+
+/* manicure hero */
+#demo-manicure .m-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 80vh;
+  align-items: center;
+  padding: 60px 80px;
+  gap: 60px;
+}
+#demo-manicure .m-eyebrow {
+  font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+#demo-manicure .m-eyebrow::before {
+  content: ''; display: block; width: 30px; height: 1px; background: var(--gold);
+}
+#demo-manicure .m-h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 64px; font-weight: 300; line-height: 1.05;
+  color: var(--black); margin-bottom: 20px;
+}
+#demo-manicure .m-h1 em { font-style: italic; color: var(--gold); }
+#demo-manicure .m-desc { font-size: 15px; color: var(--gray); line-height: 1.8; margin-bottom: 36px; }
+#demo-manicure .m-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 30px; background: var(--gold); color: white;
+  text-decoration: none; font-size: 12px; letter-spacing: 0.12em;
+  text-transform: uppercase; border-radius: 2px; font-family: 'Jost', sans-serif;
+}
+#demo-manicure .m-visual {
+  aspect-ratio: 3/4;
+  background: linear-gradient(135deg, #F5EDD6, #EDE0C4);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 100px;
+  position: relative;
+  overflow: hidden;
+}
+#demo-manicure .m-visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 40%, rgba(184,151,46,0.15), transparent 60%);
+}
+
+/* manicure services */
+#demo-manicure .m-servicos {
+  background: var(--black);
+  padding: 80px;
+}
+#demo-manicure .m-servicos-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px; font-weight: 300; color: white;
+  text-align: center; margin-bottom: 50px;
+}
+#demo-manicure .m-servicos-title em { font-style: italic; color: var(--gold-light); }
+#demo-manicure .m-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(184,151,46,0.15);
+  border: 1px solid rgba(184,151,46,0.15);
+  border-radius: 4px;
+  overflow: hidden;
+}
+#demo-manicure .m-card {
+  background: #1C1509;
+  padding: 36px 28px;
+}
+#demo-manicure .m-card-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 60px; font-weight: 300;
+  color: rgba(184,151,46,0.08); line-height: 1; margin-bottom: 12px;
+}
+#demo-manicure .m-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; color: white; margin-bottom: 16px;
+}
+#demo-manicure .m-card-price {
+  margin-bottom: 16px; padding-bottom: 16px;
+  border-bottom: 1px solid rgba(184,151,46,0.15);
+}
+#demo-manicure .m-price-row {
+  display: flex; justify-content: space-between; margin-bottom: 6px;
+}
+#demo-manicure .m-price-label { font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 0.1em; text-transform: uppercase; }
+#demo-manicure .m-price-val {
+  font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--gold-light);
+}
+#demo-manicure .m-tecnicas { list-style: none; }
+#demo-manicure .m-tecnicas li {
+  font-size: 12px; color: rgba(255,255,255,0.45);
+  padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex; gap: 8px; align-items: center;
+}
+#demo-manicure .m-tecnicas li::before {
+  content: ''; width: 3px; height: 3px; background: var(--gold);
+  border-radius: 50%; flex-shrink: 0;
+}
+
+/* manicure cta */
+#demo-manicure .m-cta {
+  background: linear-gradient(135deg, var(--gold), #9A7B1E);
+  padding: 80px; text-align: center;
+}
+#demo-manicure .m-cta h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px; font-weight: 300; color: white; margin-bottom: 12px;
+}
+#demo-manicure .m-cta p { font-size: 15px; color: rgba(255,255,255,0.8); margin-bottom: 36px; }
+#demo-manicure .m-cta a {
+  display: inline-flex; gap: 10px; align-items: center;
+  padding: 16px 36px; background: white; color: var(--gold);
+  text-decoration: none; font-weight: 500; font-size: 13px;
+  letter-spacing: 0.1em; text-transform: uppercase; border-radius: 2px;
+}
+#demo-manicure .m-footer {
+  background: var(--black); padding: 28px 80px;
+  display: flex; justify-content: space-between;
+  border-top: 1px solid rgba(184,151,46,0.1);
+  font-size: 12px; color: rgba(255,255,255,0.25);
+}
+#demo-manicure .m-footer span { color: var(--gold-light); font-family: 'Cormorant Garamond', serif; font-size: 16px; }
+
+/* ══════════════════════════════════════════
+   2. BARBEARIA (dark industrial)
+══════════════════════════════════════════ */
+#demo-barbearia {
+  --barber-red: #C0392B;
+  --barber-dark: #111214;
+  --barber-card: #18191D;
+  --barber-border: rgba(255,255,255,0.07);
+  --barber-text: #A8B0B8;
+  background: var(--barber-dark);
+  color: var(--barber-text);
+  font-family: 'Jost', sans-serif;
+  padding-top: 52px;
+}
+#demo-barbearia .b-header {
+  padding: 20px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--barber-border);
+  background: rgba(17,18,20,0.95); backdrop-filter: blur(10px);
+}
+#demo-barbearia .b-logo {
+  font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800;
+  color: white; letter-spacing: -0.02em;
+}
+#demo-barbearia .b-logo span { color: var(--barber-red); }
+#demo-barbearia .b-whats {
+  padding: 10px 22px; background: #25D366; color: white;
+  text-decoration: none; font-size: 12px; font-weight: 500;
+  border-radius: 6px; letter-spacing: 0.05em;
+}
+
+#demo-barbearia .b-hero {
+  min-height: 80vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 80px 40px;
+  position: relative; overflow: hidden;
+}
+#demo-barbearia .b-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 40%, rgba(192,57,43,0.08), transparent 70%);
+}
+#demo-barbearia .b-hero::after {
+  content: '✂';
+  position: absolute; font-size: 400px; color: rgba(255,255,255,0.015);
+  top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none;
+}
+#demo-barbearia .b-tag {
+  font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--barber-red); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 10px; justify-content: center;
+}
+#demo-barbearia .b-h1 {
+  font-family: 'Syne', sans-serif; font-size: 72px; font-weight: 800;
+  color: white; line-height: 0.95; letter-spacing: -0.04em;
+  margin-bottom: 24px; position: relative;
+}
+#demo-barbearia .b-h1 .outline {
+  -webkit-text-stroke: 1px rgba(255,255,255,0.2); color: transparent;
+}
+#demo-barbearia .b-sub {
+  font-size: 16px; color: var(--barber-text); max-width: 460px;
+  line-height: 1.7; margin-bottom: 44px; position: relative;
+}
+#demo-barbearia .b-actions { display: flex; gap: 14px; position: relative; }
+#demo-barbearia .b-btn-p {
+  padding: 14px 30px; background: var(--barber-red); color: white;
+  text-decoration: none; font-size: 13px; font-weight: 500;
+  border-radius: 6px; letter-spacing: 0.04em;
+}
+#demo-barbearia .b-btn-s {
+  padding: 14px 30px; border: 1px solid var(--barber-border); color: var(--barber-text);
+  text-decoration: none; font-size: 13px; border-radius: 6px;
+}
+
+#demo-barbearia .b-servicos { padding: 80px 60px; max-width: 1100px; margin: auto; }
+#demo-barbearia .b-sec-title {
+  font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800;
+  color: white; letter-spacing: -0.02em; margin-bottom: 40px;
+}
+#demo-barbearia .b-sec-title span { color: var(--barber-red); }
+#demo-barbearia .b-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+#demo-barbearia .b-card {
+  background: var(--barber-card);
+  border: 1px solid var(--barber-border);
+  border-radius: 10px; padding: 28px 24px;
+  transition: border-color 0.3s;
+}
+#demo-barbearia .b-card:hover { border-color: rgba(192,57,43,0.3); }
+#demo-barbearia .b-card-icon { font-size: 32px; margin-bottom: 16px; }
+#demo-barbearia .b-card h3 {
+  font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700;
+  color: white; margin-bottom: 8px;
+}
+#demo-barbearia .b-card p { font-size: 13px; color: var(--barber-text); line-height: 1.6; margin-bottom: 20px; }
+#demo-barbearia .b-card-price {
+  font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 700;
+  color: white; margin-bottom: 4px;
+}
+#demo-barbearia .b-card-price small { font-size: 14px; color: var(--barber-text); font-weight: 300; }
+
+#demo-barbearia .b-cta {
+  background: var(--barber-card); border-top: 1px solid var(--barber-border);
+  padding: 80px 60px; text-align: center;
+}
+#demo-barbearia .b-cta h2 {
+  font-family: 'Syne', sans-serif; font-size: 44px; font-weight: 800;
+  color: white; letter-spacing: -0.03em; margin-bottom: 16px;
+}
+#demo-barbearia .b-cta p { font-size: 16px; color: var(--barber-text); margin-bottom: 36px; }
+#demo-barbearia .b-cta a {
+  display: inline-flex; gap: 10px; align-items: center;
+  padding: 16px 36px; background: #25D366; color: white;
+  text-decoration: none; font-weight: 500; font-size: 14px; border-radius: 8px;
+}
+
+#demo-barbearia .b-footer {
+  padding: 24px 60px; border-top: 1px solid var(--barber-border);
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: rgba(255,255,255,0.2);
+}
+
+/* ══════════════════════════════════════════
+   3. AUTO CENTER (bold industrial orange)
+══════════════════════════════════════════ */
+#demo-autocenter {
+  --auto-orange: #E8580A;
+  --auto-dark: #0C0D0F;
+  --auto-card: #141618;
+  --auto-border: rgba(255,255,255,0.06);
+  --auto-text: #909AA3;
+  background: var(--auto-dark);
+  color: var(--auto-text);
+  font-family: 'Jost', sans-serif;
+  padding-top: 52px;
+}
+#demo-autocenter .ac-header {
+  padding: 18px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--auto-border);
+  background: rgba(12,13,15,0.95); backdrop-filter: blur(10px);
+}
+#demo-autocenter .ac-logo {
+  font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800;
+  color: white; letter-spacing: -0.02em; text-transform: uppercase;
+}
+#demo-autocenter .ac-logo span { color: var(--auto-orange); }
+#demo-autocenter .ac-nav { display: flex; gap: 8px; }
+#demo-autocenter .ac-nav a {
+  padding: 8px 18px; font-size: 12px; color: var(--auto-text);
+  text-decoration: none; border: 1px solid var(--auto-border); border-radius: 6px;
+}
+#demo-autocenter .ac-nav .ac-cta {
+  background: var(--auto-orange); color: white; border-color: var(--auto-orange);
+}
+
+#demo-autocenter .ac-hero {
+  min-height: 85vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; padding: 80px 60px; gap: 60px;
+  position: relative; overflow: hidden;
+}
+#demo-autocenter .ac-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 50% 80% at 0% 50%, rgba(232,88,10,0.06), transparent 60%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 60px),
+    repeating-linear-gradient(rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 60px);
+}
+#demo-autocenter .ac-tag {
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--auto-orange); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 8px;
+}
+#demo-autocenter .ac-tag::before {
+  content: ''; width: 20px; height: 2px; background: var(--auto-orange);
+}
+#demo-autocenter .ac-h1 {
+  font-family: 'Syne', sans-serif; font-size: 62px; font-weight: 800;
+  color: white; line-height: 0.95; letter-spacing: -0.04em; margin-bottom: 24px;
+}
+#demo-autocenter .ac-h1 em { font-style: normal; color: var(--auto-orange); }
+#demo-autocenter .ac-sub {
+  font-size: 15px; color: var(--auto-text); line-height: 1.8; margin-bottom: 40px;
+}
+#demo-autocenter .ac-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--auto-border);
+  border: 1px solid var(--auto-border); border-radius: 8px; overflow: hidden;
+  margin-bottom: 40px;
+}
+#demo-autocenter .ac-stat {
+  background: var(--auto-card); padding: 20px; text-align: center;
+}
+#demo-autocenter .ac-stat-n {
+  font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800;
+  color: white; line-height: 1;
+}
+#demo-autocenter .ac-stat-n span { color: var(--auto-orange); }
+#demo-autocenter .ac-stat-l { font-size: 11px; color: var(--auto-text); margin-top: 4px; letter-spacing: 0.05em; }
+#demo-autocenter .ac-btn {
+  display: inline-flex; gap: 8px; align-items: center;
+  padding: 14px 30px; background: var(--auto-orange); color: white;
+  text-decoration: none; font-size: 13px; font-weight: 500;
+  border-radius: 6px; letter-spacing: 0.03em;
+}
+#demo-autocenter .ac-visual {
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, #1A1B1E, #222428);
+  border-radius: 8px; border: 1px solid var(--auto-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 120px; position: relative; overflow: hidden;
+}
+#demo-autocenter .ac-visual::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 70% 30%, rgba(232,88,10,0.1), transparent 60%);
+}
+
+#demo-autocenter .ac-servicos { padding: 80px 60px; max-width: 1100px; margin: auto; }
+#demo-autocenter .ac-servicos h2 {
+  font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800;
+  color: white; letter-spacing: -0.02em; margin-bottom: 40px;
+}
+#demo-autocenter .ac-servicos h2 span { color: var(--auto-orange); }
+#demo-autocenter .ac-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+#demo-autocenter .ac-card {
+  background: var(--auto-card); border: 1px solid var(--auto-border);
+  border-radius: 10px; padding: 28px 24px;
+  border-top: 3px solid var(--auto-orange);
+}
+#demo-autocenter .ac-card-icon { font-size: 30px; margin-bottom: 14px; }
+#demo-autocenter .ac-card h3 {
+  font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700;
+  color: white; margin-bottom: 8px;
+}
+#demo-autocenter .ac-card p { font-size: 13px; color: var(--auto-text); line-height: 1.6; margin-bottom: 16px; }
+#demo-autocenter .ac-card-cta {
+  font-size: 12px; color: var(--auto-orange); letter-spacing: 0.05em;
+  text-decoration: none;
+}
+
+#demo-autocenter .ac-cta {
+  background: var(--auto-orange); padding: 80px 60px; text-align: center;
+}
+#demo-autocenter .ac-cta h2 {
+  font-family: 'Syne', sans-serif; font-size: 48px; font-weight: 800;
+  color: white; letter-spacing: -0.03em; margin-bottom: 16px;
+}
+#demo-autocenter .ac-cta p { font-size: 16px; color: rgba(255,255,255,0.85); margin-bottom: 36px; }
+#demo-autocenter .ac-cta a {
+  display: inline-flex; gap: 10px; align-items: center;
+  padding: 16px 36px; background: white; color: var(--auto-orange);
+  text-decoration: none; font-weight: 600; font-size: 14px; border-radius: 8px;
+}
+#demo-autocenter .ac-footer {
+  background: var(--auto-card); padding: 24px 60px;
+  border-top: 1px solid var(--auto-border);
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: rgba(255,255,255,0.2);
+}
+
+/* ══════════════════════════════════════════
+   4. SALÃO DE BELEZA (rose / elegant)
+══════════════════════════════════════════ */
+#demo-salao {
+  --rose: #C4777A;
+  --rose-light: #E8A0A2;
+  --rose-pale: #FDF5F5;
+  --dark: #1A0E0F;
+  --text-s: #7A5557;
+  background: var(--rose-pale);
+  color: var(--dark);
+  font-family: 'Jost', sans-serif;
+  padding-top: 52px;
+}
+#demo-salao .s-header {
+  padding: 18px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(253,245,245,0.95); backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(196,119,122,0.15);
+}
+#demo-salao .s-logo {
+  font-family: 'Cormorant Garamond', serif; font-size: 22px;
+  color: var(--dark);
+}
+#demo-salao .s-logo span { color: var(--rose); font-style: italic; }
+#demo-salao .s-cta {
+  padding: 10px 24px; background: var(--rose); color: white;
+  text-decoration: none; font-size: 12px; font-weight: 500;
+  border-radius: 100px; letter-spacing: 0.08em;
+}
+
+#demo-salao .s-hero {
+  text-align: center; padding: 80px 40px;
+  background: linear-gradient(180deg, var(--rose-pale) 0%, #F7E8E8 100%);
+  position: relative; overflow: hidden;
+}
+#demo-salao .s-hero::before {
+  content: '✿';
+  position: absolute; font-size: 400px; color: rgba(196,119,122,0.04);
+  top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;
+}
+#demo-salao .s-eyebrow {
+  font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--rose); margin-bottom: 20px;
+}
+#demo-salao .s-h1 {
+  font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 300;
+  color: var(--dark); line-height: 1.0; margin-bottom: 20px;
+}
+#demo-salao .s-h1 em { font-style: italic; color: var(--rose); }
+#demo-salao .s-sub {
+  font-size: 16px; color: var(--text-s); max-width: 480px;
+  margin: 0 auto 40px; line-height: 1.8;
+}
+#demo-salao .s-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+#demo-salao .s-btn-p {
+  padding: 14px 30px; background: var(--rose); color: white;
+  text-decoration: none; font-size: 12px; letter-spacing: 0.1em;
+  text-transform: uppercase; border-radius: 100px;
+}
+#demo-salao .s-btn-s {
+  padding: 14px 30px; border: 1px solid rgba(196,119,122,0.3); color: var(--rose);
+  text-decoration: none; font-size: 12px; letter-spacing: 0.1em;
+  text-transform: uppercase; border-radius: 100px;
+}
+
+#demo-salao .s-servicos {
+  padding: 80px 60px; max-width: 1100px; margin: auto;
+}
+#demo-salao .s-sec-tag {
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--rose); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+#demo-salao .s-sec-tag::before {
+  content: ''; width: 24px; height: 1px; background: var(--rose);
+}
+#demo-salao .s-sec-h2 {
+  font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300;
+  color: var(--dark); margin-bottom: 48px;
+}
+#demo-salao .s-sec-h2 em { font-style: italic; color: var(--rose); }
+#demo-salao .s-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+#demo-salao .s-card {
+  background: white; border-radius: 12px; overflow: hidden;
+  box-shadow: 0 4px 24px rgba(196,119,122,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+#demo-salao .s-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(196,119,122,0.15);
+}
+#demo-salao .s-card-img {
+  height: 180px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 60px;
+}
+#demo-salao .s-card-img.c1 { background: linear-gradient(135deg, #FFE4E6, #FBCFD1); }
+#demo-salao .s-card-img.c2 { background: linear-gradient(135deg, #FEE2E2, #FCA5A5); }
+#demo-salao .s-card-img.c3 { background: linear-gradient(135deg, #FDF2F8, #F9A8D4); }
+#demo-salao .s-card-body { padding: 24px; }
+#demo-salao .s-card h3 {
+  font-family: 'Cormorant Garamond', serif; font-size: 22px;
+  color: var(--dark); margin-bottom: 8px;
+}
+#demo-salao .s-card p { font-size: 13px; color: var(--text-s); line-height: 1.6; margin-bottom: 16px; }
+#demo-salao .s-card-price {
+  font-family: 'Cormorant Garamond', serif; font-size: 26px;
+  color: var(--rose); font-weight: 600;
+}
+
+#demo-salao .s-cta {
+  background: var(--dark); padding: 80px 60px; text-align: center;
+}
+#demo-salao .s-cta h2 {
+  font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300;
+  color: white; margin-bottom: 16px;
+}
+#demo-salao .s-cta h2 em { font-style: italic; color: var(--rose-light); }
+#demo-salao .s-cta p { font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 36px; }
+#demo-salao .s-cta a {
+  display: inline-flex; gap: 10px; align-items: center;
+  padding: 16px 36px; background: #25D366; color: white;
+  text-decoration: none; font-weight: 500; font-size: 14px;
+  border-radius: 100px;
+}
+#demo-salao .s-footer {
+  background: var(--dark); padding: 24px 60px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: rgba(255,255,255,0.2);
+}
+
+/* ══════════════════════════════════════════
+   5. PERSONAL TRAINER (bold green/black)
+══════════════════════════════════════════ */
+#demo-personal {
+  --pt-green: #22C55E;
+  --pt-dark: #090C0A;
+  --pt-card: #111510;
+  --pt-border: rgba(255,255,255,0.06);
+  --pt-text: #8A9E8E;
+  background: var(--pt-dark);
+  color: var(--pt-text);
+  font-family: 'Jost', sans-serif;
+  padding-top: 52px;
+}
+#demo-personal .p-header {
+  padding: 18px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--pt-border);
+  background: rgba(9,12,10,0.95); backdrop-filter: blur(10px);
+}
+#demo-personal .p-logo {
+  font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800;
+  color: white; letter-spacing: -0.02em; text-transform: uppercase;
+}
+#demo-personal .p-logo span { color: var(--pt-green); }
+#demo-personal .p-btn {
+  padding: 10px 22px; background: var(--pt-green); color: #000;
+  text-decoration: none; font-size: 12px; font-weight: 600;
+  border-radius: 6px; letter-spacing: 0.05em;
+}
+
+#demo-personal .p-hero {
+  min-height: 85vh;
+  display: grid; grid-template-columns: 1.2fr 1fr;
+  align-items: center; padding: 80px 60px; gap: 60px;
+  position: relative; overflow: hidden;
+}
+#demo-personal .p-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 50% 70% at 0% 50%, rgba(34,197,94,0.05), transparent 60%);
+}
+#demo-personal .p-tag {
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--pt-green); margin-bottom: 20px;
+}
+#demo-personal .p-h1 {
+  font-family: 'Syne', sans-serif; font-size: 66px; font-weight: 800;
+  color: white; line-height: 0.95; letter-spacing: -0.04em; margin-bottom: 24px;
+}
+#demo-personal .p-h1 span { color: var(--pt-green); }
+#demo-personal .p-sub {
+  font-size: 16px; color: var(--pt-text); line-height: 1.8; margin-bottom: 40px;
+}
+#demo-personal .p-features { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+#demo-personal .p-feat {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 14px; color: var(--pt-text);
+}
+#demo-personal .p-feat-check {
+  width: 20px; height: 20px;
+  background: rgba(34,197,94,0.12); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; color: var(--pt-green); flex-shrink: 0;
+}
+#demo-personal .p-actions { display: flex; gap: 12px; }
+#demo-personal .p-btn-p {
+  padding: 14px 30px; background: var(--pt-green); color: #000;
+  text-decoration: none; font-size: 13px; font-weight: 600; border-radius: 6px;
+}
+#demo-personal .p-btn-s {
+  padding: 14px 30px; border: 1px solid var(--pt-border); color: var(--pt-text);
+  text-decoration: none; font-size: 13px; border-radius: 6px;
+}
+#demo-personal .p-visual {
+  aspect-ratio: 3/4;
+  background: linear-gradient(160deg, #141A12, #1C2818);
+  border-radius: 10px; border: 1px solid var(--pt-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 100px; position: relative; overflow: hidden;
+}
+#demo-personal .p-visual::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 80%, rgba(34,197,94,0.08), transparent 60%);
+}
+
+#demo-personal .p-planos { padding: 80px 60px; max-width: 1100px; margin: auto; }
+#demo-personal .p-planos h2 {
+  font-family: 'Syne', sans-serif; font-size: 38px; font-weight: 800;
+  color: white; letter-spacing: -0.02em; margin-bottom: 12px;
+}
+#demo-personal .p-planos h2 span { color: var(--pt-green); }
+#demo-personal .p-planos-sub { font-size: 15px; color: var(--pt-text); margin-bottom: 48px; }
+#demo-personal .p-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+#demo-personal .p-plano {
+  background: var(--pt-card); border: 1px solid var(--pt-border);
+  border-radius: 10px; padding: 32px 24px;
+}
+#demo-personal .p-plano.p-dest { border-color: var(--pt-green); }
+#demo-personal .p-plano h3 {
+  font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700;
+  color: white; margin-bottom: 6px;
+}
+#demo-personal .p-plano-sub { font-size: 12px; color: var(--pt-text); margin-bottom: 24px; }
+#demo-personal .p-plano-price {
+  font-family: 'Syne', sans-serif; font-size: 44px; font-weight: 800;
+  color: white; line-height: 1; margin-bottom: 6px;
+}
+#demo-personal .p-plano-price small { font-size: 16px; color: var(--pt-text); font-weight: 300; }
+#demo-personal .p-plano-period { font-size: 12px; color: var(--pt-text); margin-bottom: 24px; }
+#demo-personal .p-divider { height: 1px; background: var(--pt-border); margin: 20px 0; }
+#demo-personal .p-plano ul { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+#demo-personal .p-plano li { font-size: 13px; color: var(--pt-text); display: flex; gap: 8px; }
+#demo-personal .p-plano li::before { content: '✓'; color: var(--pt-green); }
+#demo-personal .p-plano a {
+  display: block; text-align: center; padding: 12px;
+  border-radius: 6px; font-size: 13px; font-weight: 500;
+  text-decoration: none; letter-spacing: 0.04em;
+}
+#demo-personal .p-plano-btn-o { border: 1px solid var(--pt-border); color: var(--pt-text); }
+#demo-personal .p-plano-btn-s { background: var(--pt-green); color: #000; }
+
+#demo-personal .p-cta {
+  background: var(--pt-card); border-top: 1px solid var(--pt-border);
+  padding: 80px 60px; text-align: center;
+}
+#demo-personal .p-cta h2 {
+  font-family: 'Syne', sans-serif; font-size: 46px; font-weight: 800;
+  color: white; letter-spacing: -0.03em; margin-bottom: 16px;
+}
+#demo-personal .p-cta p { font-size: 16px; color: var(--pt-text); margin-bottom: 36px; }
+#demo-personal .p-cta a {
+  display: inline-flex; gap: 10px; align-items: center;
+  padding: 16px 36px; background: #25D366; color: white;
+  text-decoration: none; font-weight: 500; font-size: 14px; border-radius: 8px;
+}
+#demo-personal .p-footer {
+  padding: 24px 60px; border-top: 1px solid var(--pt-border);
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: rgba(255,255,255,0.2);
+}
+
+/* ══════════════════════════════════════════
+   6. MARMITARIA (warm amber/food)
+══════════════════════════════════════════ */
+#demo-marmitaria {
+  --mar-amber: #D97706;
+  --mar-amber-light: #F59E0B;
+  --mar-bg: #FFFBF5;
+  --mar-dark: #1C1107;
+  --mar-text: #6B5A42;
+  background: var(--mar-bg);
+  color: var(--mar-dark);
+  font-family: 'Jost', sans-serif;
+  padding-top: 52px;
+}
+#demo-marmitaria .mr-header {
+  padding: 18px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(255,251,245,0.95); backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(217,119,6,0.15);
+}
+#demo-marmitaria .mr-logo {
+  font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800;
+  color: var(--mar-dark); letter-spacing: -0.02em;
+}
+#demo-marmitaria .mr-logo span { color: var(--mar-amber); }
+#demo-marmitaria .mr-cta {
+  padding: 10px 22px; background: var(--mar-amber); color: white;
+  text-decoration: none; font-size: 12px; font-weight: 500; border-radius: 6px;
+}
+
+#demo-marmitaria .mr-hero {
+  background: linear-gradient(135deg, #1C1107 0%, #2D1D0A 50%, #1C1107 100%);
+  padding: 80px 60px; min-height: 75vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; gap: 60px;
+  position: relative; overflow: hidden;
+}
+#demo-marmitaria .mr-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 50% 70% at 80% 50%, rgba(217,119,6,0.1), transparent 60%);
+}
+#demo-marmitaria .mr-tag {
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--mar-amber-light); margin-bottom: 20px;
+}
+#demo-marmitaria .mr-h1 {
+  font-family: 'Syne', sans-serif; font-size: 60px; font-weight: 800;
+  color: white; line-height: 0.95; letter-spacing: -0.04em; margin-bottom: 20px;
+}
+#demo-marmitaria .mr-h1 span { color: var(--mar-amber); }
+#demo-marmitaria .mr-sub {
+  font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 36px;
+}
+#demo-marmitaria .mr-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 36px; }
+#demo-marmitaria .mr-badge {
+  padding: 6px 14px;
+  background: rgba(217,119,6,0.15); border: 1px solid rgba(217,119,6,0.25);
+  color: var(--mar-amber-light); font-size: 12px; border-radius: 100px;
+}
+#demo-marmitaria .mr-btn {
+  display: inline-flex; gap: 8px; align-items: center;
+  padding: 14px 30px; background: var(--mar-amber); color: white;
+  text-decoration: none; font-size: 13px; font-weight: 500; border-radius: 6px;
+}
+#demo-marmitaria .mr-visual {
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, #2D2010, #3D2A12);
+  border-radius: 50%; border: 2px solid rgba(217,119,6,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 120px; position: relative;
+}
+
+#demo-marmitaria .mr-cardapio { padding: 80px 60px; max-width: 1100px; margin: auto; }
+#demo-marmitaria .mr-cardapio h2 {
+  font-family: 'Syne', sans-serif; font-size: 38px; font-weight: 800;
+  color: var(--mar-dark); letter-spacing: -0.02em; margin-bottom: 8px;
+}
+#demo-marmitaria .mr-cardapio h2 span { color: var(--mar-amber); }
+#demo-marmitaria .mr-sub2 { font-size: 15px; color: var(--mar-text); margin-bottom: 48px; }
+#demo-marmitaria .mr-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+#demo-marmitaria .mr-item {
+  background: white; border-radius: 12px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(28,17,7,0.06);
+}
+#demo-marmitaria .mr-item-img {
+  height: 160px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 70px;
+}
+#demo-marmitaria .mr-item-img.f1 { background: linear-gradient(135deg, #FEF3C7, #FDE68A); }
+#demo-marmitaria .mr-item-img.f2 { background: linear-gradient(135deg, #ECFDF5, #BBF7D0); }
+#demo-marmitaria .mr-item-img.f3 { background: linear-gradient(135deg, #FFF7ED, #FDBA74); }
+#demo-marmitaria .mr-item-body { padding: 20px; }
+#demo-marmitaria .mr-item h3 {
+  font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700;
+  color: var(--mar-dark); margin-bottom: 6px;
+}
+#demo-marmitaria .mr-item p { font-size: 13px; color: var(--mar-text); line-height: 1.5; margin-bottom: 14px; }
+#demo-marmitaria .mr-item-footer {
+  display: flex; justify-content: space-between; align-items: center;
+}
+#demo-marmitaria .mr-item-price {
+  font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; color: var(--mar-amber);
+}
+#demo-marmitaria .mr-item-btn {
+  padding: 6px 14px; background: var(--mar-amber); color: white;
+  font-size: 11px; font-weight: 500; border-radius: 4px; text-decoration: none;
+}
+
+#demo-marmitaria .mr-cta {
+  background: var(--mar-amber); padding: 80px 60px; text-align: center;
+}
+#demo-marmitaria .mr-cta h2 {
+  font-family: 'Syne', sans-serif; font-size: 46px; font-weight: 800;
+  color: white; letter-spacing: -0.03em; margin-bottom: 16px;
+}
+#demo-marmitaria .mr-cta p { font-size: 16px; color: rgba(255,255,255,0.85); margin-bottom: 36px; }
+#demo-marmitaria .mr-cta a {
+  display: inline-flex; gap: 10px; align-items: center;
+  padding: 16px 36px; background: white; color: var(--mar-amber);
+  text-decoration: none; font-weight: 600; font-size: 14px; border-radius: 8px;
+}
+#demo-marmitaria .mr-footer {
+  background: var(--mar-dark); padding: 24px 60px;
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: rgba(255,255,255,0.2);
+}
+
+/* ══════════════════════════════════════════
+   MOBILE
+══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .demo-nav-brand { display: none; }
+  .demo-tab { padding: 0 14px; font-size: 11px; }
+
+  /* manicure mobile */
+  #demo-manicure .m-hero { grid-template-columns: 1fr; padding: 40px 24px; }
+  #demo-manicure .m-header { padding: 14px 24px; }
+  #demo-manicure .m-nav { display: none; }
+  #demo-manicure .m-h1 { font-size: 40px; }
+  #demo-manicure .m-visual { aspect-ratio: 4/3; }
+  #demo-manicure .m-cards { grid-template-columns: 1fr; }
+  #demo-manicure .m-servicos { padding: 50px 24px; }
+  #demo-manicure .m-cta { padding: 60px 24px; }
+  #demo-manicure .m-cta h2 { font-size: 36px; }
+  #demo-manicure .m-footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
+
+  /* barbearia mobile */
+  #demo-barbearia .b-header { padding: 14px 24px; }
+  #demo-barbearia .b-hero { padding: 60px 24px; }
+  #demo-barbearia .b-h1 { font-size: 48px; }
+  #demo-barbearia .b-actions { flex-direction: column; align-items: center; }
+  #demo-barbearia .b-servicos { padding: 50px 24px; }
+  #demo-barbearia .b-grid { grid-template-columns: 1fr; }
+  #demo-barbearia .b-cta { padding: 60px 24px; }
+  #demo-barbearia .b-footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
+
+  /* autocenter mobile */
+  #demo-autocenter .ac-header { padding: 14px 24px; }
+  #demo-autocenter .ac-nav { display: none; }
+  #demo-autocenter .ac-hero { grid-template-columns: 1fr; padding: 60px 24px; }
+  #demo-autocenter .ac-h1 { font-size: 46px; }
+  #demo-autocenter .ac-visual { display: none; }
+  #demo-autocenter .ac-servicos { padding: 50px 24px; }
+  #demo-autocenter .ac-grid { grid-template-columns: 1fr; }
+  #demo-autocenter .ac-cta { padding: 60px 24px; }
+  #demo-autocenter .ac-footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
+
+  /* salao mobile */
+  #demo-salao .s-header { padding: 14px 24px; }
+  #demo-salao .s-hero { padding: 60px 24px; }
+  #demo-salao .s-h1 { font-size: 48px; }
+  #demo-salao .s-servicos { padding: 50px 24px; }
+  #demo-salao .s-grid { grid-template-columns: 1fr; }
+  #demo-salao .s-cta { padding: 60px 24px; }
+  #demo-salao .s-footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
+
+  /* personal mobile */
+  #demo-personal .p-header { padding: 14px 24px; }
+  #demo-personal .p-hero { grid-template-columns: 1fr; padding: 60px 24px; }
+  #demo-personal .p-h1 { font-size: 46px; }
+  #demo-personal .p-visual { display: none; }
+  #demo-personal .p-planos { padding: 50px 24px; }
+  #demo-personal .p-grid { grid-template-columns: 1fr; }
+  #demo-personal .p-cta { padding: 60px 24px; }
+  #demo-personal .p-footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
+
+  /* marmitaria mobile */
+  #demo-marmitaria .mr-header { padding: 14px 24px; }
+  #demo-marmitaria .mr-hero { grid-template-columns: 1fr; padding: 60px 24px; }
+  #demo-marmitaria .mr-h1 { font-size: 44px; }
+  #demo-marmitaria .mr-visual { display: none; }
+  #demo-marmitaria .mr-cardapio { padding: 50px 24px; }
+  #demo-marmitaria .mr-grid { grid-template-columns: 1fr; }
+  #demo-marmitaria .mr-cta { padding: 60px 24px; }
+  #demo-marmitaria .mr-footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- DEMO SWITCHER NAV -->
+<nav class="demo-nav">
+  <div class="demo-nav-brand">Dev On-line · Demos</div>
+  <button class="demo-tab active" onclick="showDemo('manicure')">💅 Manicure</button>
+  <button class="demo-tab" onclick="showDemo('barbearia')">💈 Barbearia</button>
+  <button class="demo-tab" onclick="showDemo('autocenter')">🚗 Auto Center</button>
+  <button class="demo-tab" onclick="showDemo('salao')">💇‍♀️ Salão</button>
+  <button class="demo-tab" onclick="showDemo('personal')">🏋️ Personal</button>
+  <button class="demo-tab" onclick="showDemo('marmitaria')">🍛 Marmitaria</button>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     DEMO 1: MANICURE
+══════════════════════════════════════════ -->
+<div id="demo-manicure" class="demo-page active">
+
+  <div class="m-header">
+    <div class="m-logo">Joseane <span>Gomes</span></div>
+    <nav class="m-nav">
+      <a href="#">Sobre</a>
+      <a href="#">Serviços</a>
+      <a href="#">Localização</a>
+    </nav>
+  </div>
+
+  <div class="m-hero">
+    <div>
+      <div class="m-eyebrow">Nail Designer Profissional</div>
+      <h1 class="m-h1">Arte e beleza<br>nas suas <em>unhas</em></h1>
+      <p class="m-desc">Especialista em unhas em gel e alongamentos com técnicas modernas e materiais de alta qualidade.</p>
+      <a href="#" class="m-btn">✦ Agendar pelo WhatsApp</a>
+    </div>
+    <div class="m-visual">💅</div>
+  </div>
+
+  <div class="m-servicos">
+    <h2 class="m-servicos-title">Nossos <em>Serviços</em></h2>
+    <div class="m-cards">
+      <div class="m-card">
+        <div class="m-card-num">01</div>
+        <h3>Alongamento Natural</h3>
+        <div class="m-card-price">
+          <div class="m-price-row"><span class="m-price-label">Aplicação</span><span class="m-price-val">R$ 120</span></div>
+          <div class="m-price-row"><span class="m-price-label">Manutenção</span><span class="m-price-val">R$ 90</span></div>
+        </div>
+        <ul class="m-tecnicas">
+          <li>Molde F1 (Dual Forms)</li>
+          <li>Fibra de Vidro</li>
+          <li>Alta resistência</li>
+        </ul>
+      </div>
+      <div class="m-card">
+        <div class="m-card-num">02</div>
+        <h3>Banho em Gel Simples</h3>
+        <div class="m-card-price">
+          <div class="m-price-row"><span class="m-price-label">Aplicação</span><span class="m-price-val">R$ 110</span></div>
+          <div class="m-price-row"><span class="m-price-label">Manutenção</span><span class="m-price-val">R$ 105</span></div>
+        </div>
+        <ul class="m-tecnicas">
+          <li>Banho em Gel</li>
+          <li>Esmaltação</li>
+          <li>Francesa Tradicional</li>
+        </ul>
+      </div>
+      <div class="m-card">
+        <div class="m-card-num">03</div>
+        <h3>Blindagem em Gel</h3>
+        <div class="m-card-price">
+          <div class="m-price-row"><span class="m-price-label">Aplicação</span><span class="m-price-val">R$ 60</span></div>
+          <div class="m-price-row"><span class="m-price-label">Manutenção</span><span class="m-price-val">R$ 60</span></div>
+        </div>
+        <ul class="m-tecnicas">
+          <li>Blindagem em Gel</li>
+          <li>Esmaltação</li>
+          <li>Traços Geométricos</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-cta">
+    <h2>Pronta para unhas perfeitas?</h2>
+    <p>Agende agora e transforme suas unhas com qualidade e elegância</p>
+    <a href="#">✦ Agendar pelo WhatsApp</a>
+  </div>
+  <div class="m-footer">
+    <span>Joseane Gomes</span>
+    <span>© 2026 Nail Designer · Demo Dev On-line</span>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     DEMO 2: BARBEARIA
+══════════════════════════════════════════ -->
+<div id="demo-barbearia" class="demo-page">
+
+  <div class="b-header">
+    <div class="b-logo">Barbearia <span>Rex</span></div>
+    <a href="#" class="b-whats">💬 WhatsApp</a>
+  </div>
+
+  <div class="b-hero">
+    <div class="b-tag">✂ Barbearia Premium</div>
+    <h1 class="b-h1">Cortes que<br><span class="outline">definem</span><br>seu estilo</h1>
+    <p class="b-sub">Profissionais experientes, ambiente exclusivo e produtos de qualidade para o homem moderno.</p>
+    <div class="b-actions">
+      <a href="#" class="b-btn-p">Agendar agora</a>
+      <a href="#" class="b-btn-s">Ver serviços</a>
+    </div>
+  </div>
+
+  <div class="b-servicos">
+    <h2 class="b-sec-title">Nossos <span>Serviços</span></h2>
+    <div class="b-grid">
+      <div class="b-card">
+        <div class="b-card-icon">✂️</div>
+        <h3>Corte Clássico</h3>
+        <p>Corte tradicional com acabamento perfeito, lavagem e finalização.</p>
+        <div class="b-card-price">R$ 35 <small>/ sessão</small></div>
+      </div>
+      <div class="b-card">
+        <div class="b-card-icon">🪒</div>
+        <h3>Barba Completa</h3>
+        <p>Modelagem, hidratação e finalização com produtos premium.</p>
+        <div class="b-card-price">R$ 30 <small>/ sessão</small></div>
+      </div>
+      <div class="b-card">
+        <div class="b-card-icon">👑</div>
+        <h3>Combo VIP</h3>
+        <p>Corte + barba + sobrancelha + hidratação. Experiência completa.</p>
+        <div class="b-card-price">R$ 75 <small>/ sessão</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="b-cta">
+    <h2>Agende seu horário</h2>
+    <p>Atendimento por WhatsApp, rápido e sem burocracia</p>
+    <a href="#">💬 Falar no WhatsApp</a>
+  </div>
+  <div class="b-footer">
+    <span>Barbearia Rex © 2026</span>
+    <span>Demo Dev On-line</span>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     DEMO 3: AUTO CENTER
+══════════════════════════════════════════ -->
+<div id="demo-autocenter" class="demo-page">
+
+  <div class="ac-header">
+    <div class="ac-logo">Auto<span>Center</span> Pro</div>
+    <nav class="ac-nav">
+      <a href="#">Serviços</a>
+      <a href="#">Orçamento</a>
+      <a href="#" class="ac-cta">WhatsApp</a>
+    </nav>
+  </div>
+
+  <div class="ac-hero">
+    <div>
+      <div class="ac-tag">🔧 Oficina especializada</div>
+      <h1 class="ac-h1">Seu carro<br>em <em>boas</em><br>mãos</h1>
+      <p class="ac-sub">Mecânica geral, revisões, elétrica e muito mais. Atendimento rápido e orçamento sem compromisso.</p>
+      <div class="ac-stats">
+        <div class="ac-stat">
+          <div class="ac-stat-n">+<span>500</span></div>
+          <div class="ac-stat-l">Clientes</div>
+        </div>
+        <div class="ac-stat">
+          <div class="ac-stat-n"><span>10</span>+</div>
+          <div class="ac-stat-l">Anos</div>
+        </div>
+        <div class="ac-stat">
+          <div class="ac-stat-n"><span>100</span>%</div>
+          <div class="ac-stat-l">Garantia</div>
+        </div>
+      </div>
+      <a href="#" class="ac-btn">🔧 Solicitar orçamento</a>
+    </div>
+    <div class="ac-visual">🚗</div>
+  </div>
+
+  <div class="ac-servicos">
+    <h2>Nossos <span>Serviços</span></h2>
+    <div class="ac-grid">
+      <div class="ac-card">
+        <div class="ac-card-icon">🔧</div>
+        <h3>Mecânica Geral</h3>
+        <p>Motor, câmbio, suspensão e freios com diagnóstico completo.</p>
+        <a href="#" class="ac-card-cta">Solicitar orçamento →</a>
+      </div>
+      <div class="ac-card">
+        <div class="ac-card-icon">⚡</div>
+        <h3>Elétrica</h3>
+        <p>Diagnóstico eletrônico, injeção e sistema elétrico completo.</p>
+        <a href="#" class="ac-card-cta">Solicitar orçamento →</a>
+      </div>
+      <div class="ac-card">
+        <div class="ac-card-icon">🛞</div>
+        <h3>Pneus e Alinhamento</h3>
+        <p>Alinhamento 3D, balanceamento e troca de pneus.</p>
+        <a href="#" class="ac-card-cta">Solicitar orçamento →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ac-cta">
+    <h2>Orçamento grátis!</h2>
+    <p>Fale agora pelo WhatsApp e receba seu orçamento em minutos</p>
+    <a href="#">💬 Solicitar orçamento</a>
+  </div>
+  <div class="ac-footer">
+    <span>AutoCenter Pro © 2026</span>
+    <span>Demo Dev On-line</span>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     DEMO 4: SALÃO DE BELEZA
+══════════════════════════════════════════ -->
+<div id="demo-salao" class="demo-page">
+
+  <div class="s-header">
+    <div class="s-logo">Studio <span>Belle</span></div>
+    <a href="#" class="s-cta">Agendar</a>
+  </div>
+
+  <div class="s-hero">
+    <div class="s-eyebrow">✿ Salão de Beleza Premium</div>
+    <h1 class="s-h1">Beleza que<br><em>transforma</em></h1>
+    <p class="s-sub">Cabelo, estética e bem-estar em um ambiente sofisticado feito para você se sentir incrível.</p>
+    <div class="s-actions">
+      <a href="#" class="s-btn-p">Agendar agora</a>
+      <a href="#" class="s-btn-s">Ver serviços</a>
+    </div>
+  </div>
+
+  <div class="s-servicos">
+    <div class="s-sec-tag">O que oferecemos</div>
+    <h2 class="s-sec-h2">Nossos <em>Serviços</em></h2>
+    <div class="s-grid">
+      <div class="s-card">
+        <div class="s-card-img c1">💇‍♀️</div>
+        <div class="s-card-body">
+          <h3>Corte & Escova</h3>
+          <p>Corte personalizado, escova modeladora e finalização profissional.</p>
+          <div class="s-card-price">A partir de R$ 60</div>
+        </div>
+      </div>
+      <div class="s-card">
+        <div class="s-card-img c2">🎨</div>
+        <div class="s-card-body">
+          <h3>Coloração</h3>
+          <p>Coloração, mechas, balayage e técnicas exclusivas com produtos top.</p>
+          <div class="s-card-price">A partir de R$ 120</div>
+        </div>
+      </div>
+      <div class="s-card">
+        <div class="s-card-img c3">✨</div>
+        <div class="s-card-body">
+          <h3>Tratamentos</h3>
+          <p>Botox capilar, hidratação profunda e reconstrução dos fios.</p>
+          <div class="s-card-price">A partir de R$ 80</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-cta">
+    <h2>Agende seu horário<br><em>hoje mesmo</em></h2>
+    <p>Atendimento pelo WhatsApp, rápido e fácil</p>
+    <a href="#">💬 Agendar pelo WhatsApp</a>
+  </div>
+  <div class="s-footer">
+    <span>Studio Belle © 2026</span>
+    <span>Demo Dev On-line</span>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     DEMO 5: PERSONAL TRAINER
+══════════════════════════════════════════ -->
+<div id="demo-personal" class="demo-page">
+
+  <div class="p-header">
+    <div class="p-logo">Personal<span>Pro</span></div>
+    <a href="#" class="p-btn">Começar agora</a>
+  </div>
+
+  <div class="p-hero">
+    <div>
+      <div class="p-tag">💪 Personal Trainer Certificado</div>
+      <h1 class="p-h1">Transforme<br>seu <span>corpo</span><br>de verdade</h1>
+      <p class="p-sub">Treinos personalizados, acompanhamento nutricional e resultados reais. Do iniciante ao avançado.</p>
+      <div class="p-features">
+        <div class="p-feat"><div class="p-feat-check">✓</div> Treinos 100% personalizados</div>
+        <div class="p-feat"><div class="p-feat-check">✓</div> Acompanhamento semanal</div>
+        <div class="p-feat"><div class="p-feat-check">✓</div> Dieta e nutrição inclusos</div>
+      </div>
+      <div class="p-actions">
+        <a href="#" class="p-btn-p">Ver planos</a>
+        <a href="#" class="p-btn-s">Falar no WhatsApp</a>
+      </div>
+    </div>
+    <div class="p-visual">🏋️</div>
+  </div>
+
+  <div class="p-planos">
+    <h2>Planos de <span>Treino</span></h2>
+    <p class="p-planos-sub">Escolha o plano ideal para seus objetivos</p>
+    <div class="p-grid">
+      <div class="p-plano">
+        <h3>Starter</h3>
+        <p class="p-plano-sub">Para quem está começando</p>
+        <div class="p-plano-price"><small>R$</small> 150</div>
+        <p class="p-plano-period">/mês</p>
+        <div class="p-divider"></div>
+        <ul><li>2x por semana</li><li>Treino básico</li><li>Suporte por WhatsApp</li></ul>
+        <a href="#" class="p-plano-btn-o">Começar →</a>
+      </div>
+      <div class="p-plano p-dest">
+        <h3>Pro</h3>
+        <p class="p-plano-sub">Mais vendido</p>
+        <div class="p-plano-price"><small>R$</small> 280</div>
+        <p class="p-plano-period">/mês</p>
+        <div class="p-divider"></div>
+        <ul><li>4x por semana</li><li>Dieta personalizada</li><li>Suporte diário</li></ul>
+        <a href="#" class="p-plano-btn-s">Começar →</a>
+      </div>
+      <div class="p-plano">
+        <h3>Elite</h3>
+        <p class="p-plano-sub">Resultado máximo</p>
+        <div class="p-plano-price"><small>R$</small> 450</div>
+        <p class="p-plano-period">/mês</p>
+        <div class="p-divider"></div>
+        <ul><li>6x por semana</li><li>Dieta + suplementação</li><li>Avaliação física mensal</li></ul>
+        <a href="#" class="p-plano-btn-o">Começar →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-cta">
+    <h2>Pronto para<br>mudar sua vida?</h2>
+    <p>Fale agora e receba uma avaliação gratuita</p>
+    <a href="#">💬 Falar no WhatsApp</a>
+  </div>
+  <div class="p-footer">
+    <span>PersonalPro © 2026</span>
+    <span>Demo Dev On-line</span>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     DEMO 6: MARMITARIA
+══════════════════════════════════════════ -->
+<div id="demo-marmitaria" class="demo-page">
+
+  <div class="mr-header">
+    <div class="mr-logo">Marmita<span>Boa</span></div>
+    <a href="#" class="mr-cta">Pedir agora</a>
+  </div>
+
+  <div class="mr-hero">
+    <div>
+      <div class="mr-tag">🍛 Marmitaria Artesanal</div>
+      <h1 class="mr-h1">Comida boa<br>de verdade,<br><span>todo dia</span></h1>
+      <p class="mr-sub">Marmitas saudáveis e saborosas feitas na hora, com ingredientes frescos e muito carinho.</p>
+      <div class="mr-badges">
+        <span class="mr-badge">🥗 Fit</span>
+        <span class="mr-badge">🍖 Tradicional</span>
+        <span class="mr-badge">🌱 Vegano</span>
+        <span class="mr-badge">🚚 Entrega</span>
+      </div>
+      <a href="#" class="mr-btn">🍛 Ver cardápio</a>
+    </div>
+    <div class="mr-visual">🍱</div>
+  </div>
+
+  <div class="mr-cardapio">
+    <h2>Nosso <span>Cardápio</span></h2>
+    <p class="mr-sub2">Feito com ingredientes frescos todo dia</p>
+    <div class="mr-grid">
+      <div class="mr-item">
+        <div class="mr-item-img f1">🍗</div>
+        <div class="mr-item-body">
+          <h3>Frango Grelhado</h3>
+          <p>Peito de frango grelhado com arroz, feijão, salada e legumes no vapor.</p>
+          <div class="mr-item-footer">
+            <span class="mr-item-price">R$ 18</span>
+            <a href="#" class="mr-item-btn">Pedir</a>
+          </div>
+        </div>
+      </div>
+      <div class="mr-item">
+        <div class="mr-item-img f2">🥗</div>
+        <div class="mr-item-body">
+          <h3>Opção Fit</h3>
+          <p>Proteína magra, arroz integral, salada verde e molho especial light.</p>
+          <div class="mr-item-footer">
+            <span class="mr-item-price">R$ 20</span>
+            <a href="#" class="mr-item-btn">Pedir</a>
+          </div>
+        </div>
+      </div>
+      <div class="mr-item">
+        <div class="mr-item-img f3">🥩</div>
+        <div class="mr-item-body">
+          <h3>Carne Assada</h3>
+          <p>Carne assada ao molho, arroz, feijão, macarrão e farofa crocante.</p>
+          <div class="mr-item-footer">
+            <span class="mr-item-price">R$ 22</span>
+            <a href="#" class="mr-item-btn">Pedir</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mr-cta">
+    <h2>Peça pelo WhatsApp!</h2>
+    <p>Entregas todos os dias. Peça até as 10h e receba no almoço.</p>
+    <a href="#">💬 Fazer pedido agora</a>
+  </div>
+  <div class="mr-footer">
+    <span>MarmitaBoa © 2026</span>
+    <span>Demo Dev On-line</span>
+  </div>
+
+</div>
+
+<script>
+function showDemo(name) {
+  // Hide all pages
+  document.querySelectorAll('.demo-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
+
+  // Show selected
+  document.getElementById('demo-' + name).classList.add('active');
+
+  // Mark tab active
+  const tabs = document.querySelectorAll('.demo-tab');
+  const map = ['manicure','barbearia','autocenter','salao','personal','marmitaria'];
+  tabs[map.indexOf(name)].classList.add('active');
+
+  // Scroll to top
+  window.scrollTo(0, 0);
+}
+</script>
+
+</body>
+</html>
